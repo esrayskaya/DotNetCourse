@@ -11,17 +11,31 @@ namespace Task01
         static void Main(string[] args)
         {
             int Area;
+            bool flag=false;
             Console.WriteLine("Введите значения сторон прямоугольника");
-            Console.Write("Введите значение стороны а: ");
-            string stA = Console.ReadLine();
-            int SideA;
-            if (int.TryParse(stA, out SideA) == false) { }
-            Console.Write("Введите значение стороны b: ");
-            //int SideB = int.Parse(Console.ReadLine());
-            string stB = Console.ReadLine();
-            int SideB;
-            if (int.TryParse(stB, out SideB) == false) { }
-            if ((SideA <= 0) || (SideB <= 0))
+            //while (flag == false)
+            //{
+                Console.Write("Введите значение стороны а: ");
+                string stA = Console.ReadLine();
+                int SideA;
+                if (int.TryParse(stA, out SideA) == false)
+                {
+                    flag = false;
+                }
+
+                Console.Write("Введите значение стороны b: ");
+                //int SideB = int.Parse(Console.ReadLine());
+                string stB = Console.ReadLine();
+                int SideB;
+                if (int.TryParse(stB, out SideB) == false)
+                {
+                    flag = false;
+                }
+            //}
+            if (flag==false)
+            { }
+
+           else if ((SideA <= 0) || (SideB <= 0))
             {
                 Console.WriteLine("Введено неверное значение!");
             }
