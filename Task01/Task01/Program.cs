@@ -10,39 +10,32 @@ namespace Task01
     {
         static void Main(string[] args)
         {
-            int Area;
-            bool flag=false;
+            int area;
             Console.WriteLine("Введите значения сторон прямоугольника");
-            //while (flag == false)
-            //{
+            Console.Write("Введите значение стороны а: ");
+            int sideA;
+            //if (int.TryParse(stA, out SideA) == false) {  }
+            while (!int.TryParse(Console.ReadLine(), out sideA))
+            {
                 Console.Write("Введите значение стороны а: ");
-                string stA = Console.ReadLine();
-                int SideA;
-                if (int.TryParse(stA, out SideA) == false)
-                {
-                    flag = false;
-                }
+            }
 
+            Console.Write("Введите значение стороны b: ");
+            int sideB;
+            //if (int.TryParse(stB, out SideB) == false) { }
+            while (!int.TryParse(Console.ReadLine(), out sideB))
+            {
                 Console.Write("Введите значение стороны b: ");
-                //int SideB = int.Parse(Console.ReadLine());
-                string stB = Console.ReadLine();
-                int SideB;
-                if (int.TryParse(stB, out SideB) == false)
-                {
-                    flag = false;
-                }
-            //}
-            if (flag==false)
-            { }
+            }
 
-           else if ((SideA <= 0) || (SideB <= 0))
+            if ((sideA <= 0) || (sideB <= 0) || (sideA >= 300) || (sideB >= 300))
             {
                 Console.WriteLine("Введено неверное значение!");
             }
             else
             {
-                Area = SideA * SideB;
-                Console.WriteLine("Площадь треугольника S равна: " + Area);
+                area = sideA * sideB;
+                Console.WriteLine("Площадь треугольника S равна: " + area);
             }
 
             Console.ReadLine();

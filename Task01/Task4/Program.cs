@@ -11,21 +11,21 @@ namespace Task4
         static void Main(string[] args)
         {
             Console.Write("Введите колличество строк N: ");
-            int RowsCount;
-            while ((!int.TryParse(Console.ReadLine(), out RowsCount)) || (RowsCount <= 0) || (RowsCount > 50))
+            int rowsCount;
+            while ((!int.TryParse(Console.ReadLine(), out rowsCount)) || (rowsCount <= 0) || (rowsCount > 50))
             {
                 Console.Write("Введите колличество строк N: ");
             }
 
-            for (int n = 0; n <= RowsCount; n++)
+            for (int n = 0; n <= rowsCount; n++)
             {
                 for (int i = 0; i < n; i++)
                 {
-                    for (int j = i; j < RowsCount; j++)
+                    for (int j = i; j < rowsCount-1; j++)
                     {
                         Console.Write(" ");
                     }
-                    for (int k = RowsCount; k >= RowsCount - 2 * i; k--)
+                    for (int k = rowsCount; k >= rowsCount - 2 * i; k--)
                     {
                         Console.Write("*");
                     }
