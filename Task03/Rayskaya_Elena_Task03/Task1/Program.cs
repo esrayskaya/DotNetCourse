@@ -9,10 +9,10 @@ namespace Task1
 {
     class Program
     {
-        static int FindMinElementOfArray(ref int[] a)
+        static int FindMinElementOfArray(int[] a)
         {
             int min = a[0];
-            for (int i = 0; i < a.Length; i++)
+            for (int i = 1; i < a.Length; i++)
             {
                 if (a[i] < min)
                 {
@@ -21,10 +21,10 @@ namespace Task1
             }
             return min;
         }
-        static int FindMaxElementOfArray(ref int[] a)
+        static int FindMaxElementOfArray(int[] a)
         {
             int max = a[0];
-            for (int i = 0; i < a.Length; i++)
+            for (int i = 1; i < a.Length; i++)
             {
                 if (a[i] > max)
                 {
@@ -33,7 +33,7 @@ namespace Task1
             }
             return max;
         }
-        static void OneDimentionalArraySort(ref int[] a)
+        static void OneDimentionalArraySort(int[] a)
         {
             for (int i = 0; i < a.Length; i++)
             {
@@ -52,15 +52,15 @@ namespace Task1
         {
             int n = 9;
             int[] arr = new int[n];
-            Class1.OneDimentionalArrayFilling(ref arr);
+            Class1.OneDimentionalArrayFilling(arr);
             Console.Write("Исходный массив: ");
-            Class1.OneDimentionalArrayOutput(ref arr);
+            Class1.OneDimentionalArrayOutput(arr);
             Console.WriteLine();
-            Console.WriteLine("Минимальный элемент массива: " + FindMinElementOfArray(ref arr));
-            Console.WriteLine("Максимальный элемент массива: " + FindMaxElementOfArray(ref arr));
+            Console.WriteLine("Минимальный элемент массива: " + FindMinElementOfArray(arr));
+            Console.WriteLine("Максимальный элемент массива: " + FindMaxElementOfArray(arr));
             Console.Write("Отсортированный массив: ");
-            OneDimentionalArraySort(ref arr);
-            Class1.OneDimentionalArrayOutput(ref arr);
+            OneDimentionalArraySort(arr);
+            Class1.OneDimentionalArrayOutput(arr);
             Console.ReadLine();
         }
     }

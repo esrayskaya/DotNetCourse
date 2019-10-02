@@ -8,7 +8,7 @@ namespace Task2
 {
     class Program
     {
-        static void ThreeDimentionArrayFilling(ref int[,,] a)
+        static void ThreeDimentionArrayFilling(int[,,] a)
         {
             Random rand = new Random();
             for (int i = 0; i < a.GetLength(0); i++)
@@ -22,7 +22,7 @@ namespace Task2
                 }
             }
         }
-        static void ThreeDimentionalArrayOutput(ref int[,,] a)
+        static void ThreeDimentionalArrayOutput(int[,,] a)
         {
             for (int i = 0; i < a.GetLength(0); i++)
             {
@@ -40,7 +40,7 @@ namespace Task2
                 Console.Write(")");
             }
         }
-        static void ThreeDimentionalArrayReplacemantOfElements(ref int[,,] a)
+        static void ThreeDimentionalArrayReplacemantOfElements(int[,,] a)
         {
             for (int i = 0; i < a.GetLength(0); i++)
             {
@@ -62,12 +62,12 @@ namespace Task2
             int n=2, m=2, l=3;
             int[,,] arr = new int[n, m, l];
             Console.Write("Исходный трехмерный массив: ");
-            ThreeDimentionArrayFilling(ref arr);
-            ThreeDimentionalArrayOutput(ref arr);
-            ThreeDimentionalArrayReplacemantOfElements(ref arr);
+            ThreeDimentionArrayFilling(arr);
+            ThreeDimentionalArrayOutput(arr);
+            ThreeDimentionalArrayReplacemantOfElements(arr);
             Console.WriteLine();
             Console.Write("Трехмерный массив с замененными положительными элементами: ");
-            ThreeDimentionalArrayOutput(ref arr);
+            ThreeDimentionalArrayOutput(arr);
             Console.ReadLine();
         }
     }

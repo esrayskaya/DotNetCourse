@@ -8,7 +8,7 @@ namespace Task4
 {
     class Program
     {
-        static void TwoDimentionalArrayFilling(ref int[,] a)
+        static void TwoDimentionalArrayFilling(int[,] a)
         {
             Random rand = new Random();
             for (int i=0; i < a.GetLength(0); i++)
@@ -19,7 +19,7 @@ namespace Task4
                 }
             }
         }
-        static void TwoDimentionalArrayOutput(ref int[,] a)
+        static void TwoDimentionalArrayOutput(int[,] a)
         {
             Random rand = new Random();
             for (int i = 0; i < a.GetLength(0); i++)
@@ -31,7 +31,7 @@ namespace Task4
                 Console.WriteLine();
             }
         }
-        static int TwoDimensionalArraySumOfElementsInEvenPosition(ref int[,] a)
+        static int TwoDimensionalArraySumOfElementsInEvenPosition(int[,] a)
         {
             int sum = 0;
             for (int i = 0; i < a.GetLength(0); i++)
@@ -52,10 +52,10 @@ namespace Task4
             int n = 5;
             int m = 6;
             int[,] arr = new int[n, m];
-            TwoDimentionalArrayFilling(ref arr);
+            TwoDimentionalArrayFilling(arr);
             Console.WriteLine("Двумерный массив:");
-            TwoDimentionalArrayOutput(ref arr);
-            Console.Write("Сумма элементов, стоящих на четных позициях: " + TwoDimensionalArraySumOfElementsInEvenPosition(ref arr));
+            TwoDimentionalArrayOutput(arr);
+            Console.Write("Сумма элементов, стоящих на четных позициях: " + TwoDimensionalArraySumOfElementsInEvenPosition(arr));
             Console.ReadLine();
         }
     }

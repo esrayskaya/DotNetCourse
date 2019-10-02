@@ -4,7 +4,7 @@ namespace ArrayLibrary
 {
     public class Class1
     {
-        public static void OneDimentionalArrayFilling(ref int[] a)
+        public static void OneDimentionalArrayFilling(int[] a)
         {
             Random rand = new Random();
             for (int i = 0; i < a.Length; i++)
@@ -12,7 +12,7 @@ namespace ArrayLibrary
                 a[i] = rand.Next(-50, 50);
             }
         }
-        public static void OneDimentionalArrayOutput(ref int[] a)
+        public static void OneDimentionalArrayOutput(int[] a)
         {
             for (int i = 0; i < a.Length; i++)
             {
