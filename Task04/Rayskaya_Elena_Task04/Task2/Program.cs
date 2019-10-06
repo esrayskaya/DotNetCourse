@@ -17,7 +17,7 @@ namespace Task2
 
             for (int i=0; i < stringOne.Length; i++)
             {
-                if (stringTwo.Contains(stringOne[i]))
+                if ( (stringTwo.Contains(stringOne[i])) && (stringOne[i]!=' ')) 
                 {
 
                     Console.Write(stringOne[i]);

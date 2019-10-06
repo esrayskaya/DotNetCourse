@@ -12,7 +12,6 @@ namespace Task1
         {
             Console.WriteLine("Введите строку:");
             string str = Console.ReadLine();
-
             int kol = 0;
             /*int kolsymbol;*/
             var charsToRemove = new string[] { "!", ",", ".", ";", "'", "?" };
@@ -41,12 +40,11 @@ namespace Task1
                 {
                     kol++;
                 }
-                //Console.WriteLine(kol);
             }
             int countOfSymbol = str.Length - kol;
-            Console.WriteLine("Количество символов без пробелов= " + countOfSymbol);
+            //Console.WriteLine("Количество символов без пробелов= " + countOfSymbol);
             int countOfWords = kol + 1;
-            Console.WriteLine("Количество слов в строке= " + countOfWords);
+            //Console.WriteLine("Количество слов в строке= " + countOfWords);
             float awerageWordLength = countOfSymbol / countOfWords;
             Console.WriteLine("Средняя дина строки " + awerageWordLength);
             Console.ReadLine();
