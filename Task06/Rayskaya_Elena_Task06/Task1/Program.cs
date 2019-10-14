@@ -75,7 +75,7 @@ namespace Task1
             Patronymic = p;
             if (dt > DateTime.Now)
             {
-                throw new DateNotTrueException("Дата \"" + dt + "\" не верная!");
+                throw new DateNotTrueException("Дата \"" + dt.ToShortDateString() + "\" не верная!");
             }
             else DateOfBirthDay = dt;
         }
@@ -93,23 +93,27 @@ namespace Task1
         protected int workExperience;
         protected string position;
         public int WorkExperience
-        {
-            get
+        { get; set;
+            /*get
             {
                 return workExperience;
             }
             set
             {
-                if ((value >= 0) && (value <Age))
+                if ((value >= 0) && (value < Age))
                 {
                     workExperience = value;
                 }
-            }
+            }*/
         }
         public string Position { get; set; }
         public Employee(string s, string n, string p, DateTime d, int w, string pos) : base(s, n, p, d)
         {
-            WorkExperience = w;
+            if (WorkExperience >= Age)
+            {
+                throw new Exception("Стаж не может быть больше возраста!");
+            }
+            else WorkExperience = w;
             Position = pos;
         }
         public void GetInfo()
@@ -147,13 +151,20 @@ namespace Task1
         }
         static void Main(string[] args)
         {
-            Employee intern = new Employee(GetData("фамилию: "),
-                                           GetData("имя: "), 
-                                           GetData("отчество: "), 
-                                           CheckDateOfBirthDay("дату рождения: "),
-                                           CheckOfWorkExperience("стаж работы: "),
-                                           GetData("должность: "));
-            intern.GetInfo();
+            try
+            {
+                Employee intern = new Employee(GetData("фамилию: "),
+                                               GetData("имя: "),
+                                               GetData("отчество: "),
+                                               CheckDateOfBirthDay("дату рождения: "),
+                                               CheckOfWorkExperience("стаж работы: "),
+                                               GetData("должность: "));
+                intern.GetInfo();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
             Console.ReadLine();
         }
     }

@@ -78,9 +78,9 @@ namespace Task2
         }
         public Ring(int x, int y, int r, double ir) : base(x, y, r)
         {
-            if (ir >= r)
+            if ((ir >= r)|| (ir<=0) || (r<=0))
             {
-                throw new Exception("Внешний радиус меньше внутреннего!");
+                throw new Exception("Неверное значение радиуса!");
                // Console.WriteLine()
             }
             else InnerR = ir;
@@ -88,8 +88,8 @@ namespace Task2
         public void GetInfo()
         {
             base.GetInfo();
-            Console.WriteLine("Внутренний r= " + InnerR);
-            Console.WriteLine("Площадь кольца: "+ AreaOfRing);
+            Console.WriteLine("Внутренний радиус: " + InnerR);
+            Console.WriteLine("Площадь кольца: "+ String.Format("{0:0.000}", AreaOfRing));
         }
         public bool CheckOfExistRing(double radiusCircle, double radiusInner)
         {
@@ -126,11 +126,18 @@ namespace Task2
         }
         static void Main(string[] args)
         {
-            Ring ring1 = new Ring(InputCoordinate("координату х: "),
-                                     InputCoordinate("координату у: "),
-                                     InputRadius("внешний радиус: "),
-                                     InputRadius("внутренний радиус: "));
-            ring1.GetInfo();
+            try
+            {
+                Ring ring1 = new Ring(InputCoordinate("координату х: "),
+                                         InputCoordinate("координату у: "),
+                                         InputRadius("внешний радиус: "),
+                                         InputRadius("внутренний радиус: "));
+                ring1.GetInfo();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
             Console.ReadLine();
         } 
     }
