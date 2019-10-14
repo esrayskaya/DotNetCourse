@@ -1,49 +1,132 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+
 using System.Threading.Tasks;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+
+
 using System.Text;
 
 namespace Task4
 {
-    class Program
+    class MyString
     {
-        class MyString
-        {
-            public char[] str { get; set; }
-            
-            /* private char[] _stringOne;
-             private char[] _stringTwo;
-             public char[] StringOne
-             { get; set; }
-             public char StringTwo
-             { get; set; }*/
-            //public MyString(char[] _s1) { StringOne = _s1; }
-            //public MyString (char[] s1) { str = s1; }
-            /*public static MyString operator +(MyString str1, MyString str2)
-            {
-                return new MyString str = Array.IndexOf<char>str1.str + Array.IndexOf<char>str2.str;
-            }*/
-            public static MyString operator + (MyString s1, MyString s2)
-            {
-                char[] temp = s1.str+s2.str;
+        public char[] str { get; set; }
 
-                return new MyString(temp);
+        private List<char> innerList;
+        public List<char> InnerList { get; set; }
+        public MyString(char[] charArr)
+        {
+            InnerList = new List<char>();
+            if (charArr != null)
+                InnerList.AddRange(charArr);
+        }
+        public static MyString operator +(MyString s1, MyString s2)
+        {
+            char[] temp = (s1.InnerList.Concat(s2.InnerList)).ToArray();
+            //char[] temp = (s1.innerList.Union(s2.innerList)).ToArray();
+            return new MyString(temp);
+        }
+        public static MyString operator -(MyString s1, MyString s2)
+        {            
+            for (int j = 0; j < s2.InnerList.Count; j++)
+            {
+                s1.InnerList.Remove(s2.InnerList[j]);
             }
+            return new MyString(s1.InnerList.ToArray());
+        }
+        public static bool operator ==(MyString s1, MyString s2)
+        {
+            int countFalse = 0;
+            if (s1.InnerList.Count == s2.InnerList.Count)
+            {
+                return true;
+            }
+            else
+            {
+                for (int i = 0; i < s1.InnerList.Count; i++)
+                {
+                    if (s1.InnerList[i] != s2.InnerList[i])
+                    {
+                        countFalse++;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                if (countFalse == s1.InnerList.Count)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+        public static bool operator !=(MyString s1, MyString s2)
+        {
+            int countFalse = 0;
+            if (s1.InnerList.Count != s2.InnerList.Count)
+            {
+                return true;
+            }
+            else
+            {
+                for (int i = 0; i < s1.InnerList.Count; i++)
+                {
+                    if (s1.InnerList[i] != s2.InnerList[i])
+                    {
+                        countFalse++;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                if (countFalse == s1.InnerList.Count)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+             }
+        }
+        public MyString ToMyString(object obj)
+        {
+            return obj as MyString;
+        }
+        public void GetInfo()
+        {
+            string res = new string(this.InnerList.ToArray());
+            Console.WriteLine(res);
 
         }
+        public MyString() { }
+    }
+    class Program
+    {
         static void Main(string[] args)
         {
-            /*char[] strOne = Console.ReadLine().ToCharArray();
-            Console.Write("Введите вторую строку: ");
-            char[] strTwo = Console.ReadLine().ToCharArray();*/
-            MyString myStringOne = new MyString("kjh".ToCharArray());
-            MyString myStringTwo = new MyString("hfb".ToCharArray());
-            MyString str3 = myStringOne + myStringTwo;
+            Console.WriteLine("Введите первую строку: ");
+            char[] stringOne = Console.ReadLine().ToCharArray();
+            Console.WriteLine("Введите вторую строку: ");
+            char[] stringTwo = Console.ReadLine().ToCharArray();
+
+            MyString myStringOne = new MyString(stringOne);
+            MyString myStringTwo = new MyString(stringTwo);
+            Console.WriteLine("Сложение двух строк: ");
+            MyString myStringThree = myStringOne + myStringTwo;
+            myStringThree.GetInfo();
+            Console.WriteLine("Удаление: ");
+            MyString myStringFour = myStringThree - myStringOne;
+            myStringFour.GetInfo();
+            MyString stringFive = new MyString();
+            string str = Console.ReadLine();
+            stringFive = stringFive.ToMyString(str);
 
             Console.ReadLine();
         }

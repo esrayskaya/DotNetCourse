@@ -68,8 +68,8 @@ namespace Task3
             string dateAndTimeRussia = DateTime.Now.ToString(usCultureRussia.DateTimeFormat);*/
 
             OutputCompaireOfCulture("en-US", "ru-RU");
-            OutputCompaireOfCulture("en-US", "de-DE");
-            OutputCompaireOfCulture("de-DE", "ru-RU");
+            OutputCompaireOfCulture("en-US", "");
+            OutputCompaireOfCulture("", "ru-RU");
             Console.ReadLine();
         }
     }

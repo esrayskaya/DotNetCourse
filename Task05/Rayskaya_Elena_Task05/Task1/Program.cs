@@ -10,30 +10,18 @@ namespace Task1
     {
         class User
         {
-            private string _surname;
-            private string _name;
-            private string _patronymic;
-            private DateTime _dateOfBirthday;
+            private string surname;
+            private string name;
+            private string patronymic;
+            private DateTime dateOfBirthday;
             public string Surname
-            {
-                get { return _surname; }
-                set { _surname = value; }
-            }
+            { get; set; }
             public string Name
-            {
-                get { return _name; }
-                set { _name = value; }
-            }
+            { get; set; }
             public string Patronymic
-            {
-                get { return _patronymic; }
-                set { _patronymic = value; }
-            }
-            public DateTime DateOfBirthDay
-            {
-                get { return _dateOfBirthday; }
-                set { _dateOfBirthday = value; }
-            }
+            { get; set; }
+            public DateTime DateOfBirthDay 
+            { get; set; }
             public void OutputInfo()
             {
                 Console.WriteLine("Фамилия: " + Surname);
