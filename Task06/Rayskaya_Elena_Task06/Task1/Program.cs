@@ -64,20 +64,19 @@ namespace Task1
             else
             {
                 age = yearNow - yearOfBirthDay;
-                //Console.WriteLine($"Возраст: {age.ToString()}");
             }
             return age;
         }
-        public User(string s, string n, string p, DateTime dt)
+        public User(string surename, string name, string patronymic, DateTime dateOfBithDay)
         {
-            Surname = s;
-            Name = n;
-            Patronymic = p;
-            if (dt > DateTime.Now)
+            Surname = surename;
+            Name = name;
+            Patronymic = patronymic;
+            if (dateOfBithDay > DateTime.Now)
             {
-                throw new DateNotTrueException("Дата \"" + dt.ToShortDateString() + "\" не верная!");
+                throw new DateNotTrueException("Дата \"" + dateOfBithDay.ToShortDateString() + "\" не верная!");
             }
-            else DateOfBirthDay = dt;
+            else DateOfBirthDay = dateOfBithDay;
         }
         public void GetInfo()
         {
@@ -93,28 +92,16 @@ namespace Task1
         protected int workExperience;
         protected string position;
         public int WorkExperience
-        { get; set;
-            /*get
-            {
-                return workExperience;
-            }
-            set
-            {
-                if ((value >= 0) && (value < Age))
-                {
-                    workExperience = value;
-                }
-            }*/
-        }
+        { get; set; }
         public string Position { get; set; }
-        public Employee(string s, string n, string p, DateTime d, int w, string pos) : base(s, n, p, d)
+        public Employee(string surname, string name, string patronymic, DateTime dateOfBithDay, int workExperience, string position) : base(surname, name, patronymic, dateOfBithDay)
         {
-            if (WorkExperience >= Age)
+            if (workExperience >= Age)
             {
                 throw new Exception("Стаж не может быть больше возраста!");
             }
-            else WorkExperience = w;
-            Position = pos;
+            WorkExperience = workExperience;
+            Position = position;
         }
         public void GetInfo()
         {
