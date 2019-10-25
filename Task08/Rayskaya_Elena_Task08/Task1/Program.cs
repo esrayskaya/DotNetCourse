@@ -11,7 +11,6 @@ namespace Task1
         public T[] array;
         int capasity;
         int length;
-        int countOfElements;
         public int Capasity
         {
             get { return array.Length; }
@@ -47,7 +46,9 @@ namespace Task1
         }
         public void Add(T element)
         {
-            if (Length + 1 > Capasity)
+            Insert(element, Length);
+
+            /*if (Length + 1 > Capasity)
             {
                 T[] newArray = new T[Capasity * 2];
                 array = newArray;
@@ -56,7 +57,7 @@ namespace Task1
             {
                 array[Length] = element;
                 Length++;
-            }
+            }*/
         }
         public void AddRange(T[] myArray)
         {
@@ -65,7 +66,7 @@ namespace Task1
                 T[] newArray = new T[Capasity * 2];
                 array = newArray;
             }
-            else
+           /// else
             {
                 for(int i=0; i < myArray.Length; i++)
                 {
@@ -77,23 +78,25 @@ namespace Task1
         public bool Remove(int index)
         {
             T[] newArray = new T[Capasity];
-            if (index < Length)
+            if (index > Length)
             {
-                for (int i = 0; i < array.Length; i++)
+                return false;
+            }
+            else
+            {
+                if (index == 0)
                 {
-                    if (i == index)
-                    {
-                        i++;
-                    }
-                    else
+                    for(int i = 1; i < array.Length; i++)
                     {
                         newArray[i] = array[i];
                     }
-                    return true;
+                }
+                for (int i = index; i < array.Length; i++)
+                {
+                    newArray[i] = array[i];
                 }
                 return true;
             }
-            else return false;
         }
         public T[] Insert(T element, int index)
         {
@@ -106,7 +109,18 @@ namespace Task1
             {
                 for(int i = 0; i < array.Length; i++)
                 {
-                    
+                    if (i < index)
+                    {
+                        newArray[i] = array[i];
+                    }
+                    else if (i == index)
+                    {
+                        newArray[i] = array[index];
+                    }
+                    else if (i > index)
+                    {
+                        newArray[i] = array[i + 1];
+                    }
                 }
             }
             return newArray;
