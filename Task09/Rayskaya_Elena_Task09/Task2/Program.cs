@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,11 +9,13 @@ namespace Task2
 {
     class Program
     {
-        class DynamicArray<T>
+        class DynamicArray<T> : IEnumerable
         {
             public T[] array;
             int capasity;
             int length;
+            int currentIndex;
+            
             public int Capasity
             {
                 get { return array.Length; }
@@ -50,6 +53,14 @@ namespace Task2
             {
                 array = col.ToArray();
                 Length = array.Length;
+                int count = 0;
+                IEnumerator numeratir = col.GetEnumerator();
+                while (numeratir.MoveNext())
+                {
+                    count++;
+                }
+                numeratir.Reset();
+                array = new T[count];
             }
             public void Add(T element)
             {
@@ -131,6 +142,27 @@ namespace Task2
                     }
                     return array[index];
                 }
+            }
+            public IEnumerator GetEnumerator()
+            {
+                return array.GetEnumerator();
+            }
+            public bool MoveNext()
+            {
+                currentIndex++;
+                return currentIndex < Length; //&& currentIndex>=0);
+
+            }
+            public object Current
+            {
+                get
+                {
+                    return array[currentIndex];
+                }
+            }
+            public void Reset()
+            {
+                currentIndex = -1;
             }
         }
         static void Main(string[] args)

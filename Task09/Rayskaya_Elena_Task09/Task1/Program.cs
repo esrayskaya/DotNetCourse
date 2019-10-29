@@ -21,7 +21,7 @@ namespace Task1
                     {
                         listT.Add(element);
                     }
-                    flag = false;
+                    flag = !flag;
                 }
                 list = new List<T>(listT) as ICollection<T>;
             }
@@ -29,13 +29,22 @@ namespace Task1
         }
         static void Main(string[] args)
         {
-            List<int> listOfNumber = new List<int>(7) { 1, 2, 3, 4, 5, 6, 7 };
+            List<int> listOfNumber = new List<int>() { 1, 2, 3, 4, 5, 6, 7 };
+            LinkedList<int> linkedListOfNumber = new LinkedList<int>(listOfNumber);
             Console.WriteLine("Элементы до удаления:");
             foreach(int element in listOfNumber)
             {
                 Console.WriteLine(element);
             }
-            int i1 = 1;
+            Console.WriteLine("После: " + RemoveEachSecondItem(listOfNumber).ToString());
+            Console.WriteLine("Элементы до удаления:");
+
+            foreach (int element in linkedListOfNumber)
+            {
+                Console.WriteLine(element.ToString());
+            }
+            Console.WriteLine("После: " + RemoveEachSecondItem(linkedListOfNumber).ToString());
+            /*int i1 = 1;
             int firstCount = listOfNumber.Count;
             while (listOfNumber.Count != 1)
             {
@@ -70,16 +79,8 @@ namespace Task1
             foreach(int element in listOfNumber)
             {
                 Console.WriteLine(element);
-            }
-            //List<T> col =new List<T>() { 1,2,3,4,5}
-            //Console.WriteLine(RemoveEachSecondItem(listOfNumber));
-            Console.WriteLine("Элементы до удаления:");
-            int[] number = { 1, 2, 3, 4, 5, 6, 7 };
-            LinkedList<int> linkedListOfNumber = new LinkedList<int>(number);
-            foreach(int element in linkedListOfNumber)
-            {
-                Console.WriteLine(element.ToString());
-            }
+            }*/
+
             Console.ReadLine();
         }
     }
