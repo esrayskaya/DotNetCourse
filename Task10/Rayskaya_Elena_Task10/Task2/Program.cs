@@ -36,19 +36,24 @@ namespace Task2
             Person mary = new Person { Name = "Mary" };
             Person hugo = new Person { Name = "Hugo" };
             Message mes; // 2. Создаем переменную делегата
-            Message mes1 = john.Greet;
+            //Message mes1 = john.Greet;
             if (DateTime.Now.Hour < 12)
             {
                 Message greetByJohn = new Message(john.Greet);
                 Message greetByMary = new Message(mary.Greet);
                 Message greetByHugo = new Message(hugo.Greet);
-                //mes1 = john.Greet;
-                mes =mes1+  GoodMorning; // 3. Присваиваем этой переменной адрес метода
-                
+                Message mes1 = john.Greet;
+                mes = GoodMorning; // 3. Присваиваем этой переменной адрес метода
+                Message mes2 = mes1 + mes;
             }
             else
             {
+                Message greetByJohn = new Message(john.Greet);
+                Message greetByMary = new Message(mary.Greet);
+                Message greetByHugo = new Message(hugo.Greet);
+                Message mes1 = john.Greet;
                 mes = GoodEvening;
+                Message mes2 = mes1 + mes;
             }
             mes(); // 4. Вызываем метод
             Console.ReadKey();
