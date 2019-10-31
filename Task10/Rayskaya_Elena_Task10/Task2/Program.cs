@@ -15,24 +15,62 @@ namespace Task2
             Time = time;
         }
     }
-    public class Office : HashSet<Person> // Офис - Список из неповторяющихся элементов
+    public delegate void SayHello(Person people, DateTime time);
+    public delegate void SayBye(Person people);
+    public class Office  
     {
+        private SayHello greetAll;
+        private SayBye byeAll;
 
+        public Office(List<Person> persons)
+        {
+            foreach (var element in persons)
+            {
+                element.onCome += OnCameHandler;
+                element.onLeave += OnLeaveHandler;
+
+            }
+        }
+        private void OnCameHandler(Person p, DateTime time)
+        {
+
+            Console.WriteLine($"{p.Name} пришел");
+            // вызываем все методы приветствия, какие есть
+            greetAll?.Invoke(p, time);
+            greetAll += p.Greet;
+            byeAll += p.SayBye;
+        }
+        private void OnLeaveHandler(Person p)
+        {
+            Console.WriteLine($"{p.Name} ушел");
+            greetAll -= p.Greet;
+            byeAll -= p.SayBye;
+            byeAll?.Invoke(p);
+        }
     }
-    public delegate void OfficeEventHandler(object sender, OfficeEventArgs args);//sender, args
 
-    
+    public delegate void OfficeEventHandler(object sender, OfficeEventArgs args);//sender, args
+    public delegate void OnCame(Person p, DateTime time);
+    public delegate void OnLeave(Person p);
+
+
     public class Person
     {
-        private string Name { get; }
-        private event OfficeEventHandler Come;
-        private event EventHandler Leave;
+        public string Name { get; set; }
+        /*private event OfficeEventHandler Come;
+        private event EventHandler Leave;*/
+        public event OnCame onCome;
+        public event OnLeave onLeave;
         private Office office;
-
-        //public  string Name { get; set; }
-
-        public delegate void ComeDelegate(Person people);
-        public event ComeDelegate PeopleCome;
+        public void Come(DateTime time)
+        {
+            onCome?.Invoke(this, time);
+        }
+        public void Leave()
+        {
+            onLeave?.Invoke(this);
+        }
+        
         public void Greet(Person people, DateTime time)
         {
             string hello;
@@ -55,33 +93,6 @@ namespace Task2
             string bye = "До свидвния";
             Console.WriteLine($"'{bye}, {people.Name}' - сказал {Name}");
         }
-        public void OnCome(DateTime time)
-        {
-            foreach (var person in office)
-            {
-                Come += (sender, args) => { person.Greet(this, time); };
-            }
-            //Console.WriteLine($"{Name} пришел на работу в {time}.");
-            Console.WriteLine(Name + " пришел на работу");
-            Come?.Invoke(this, new OfficeEventArgs(time));
-            office.Add(this);
-        }
-        public void OnLeave()
-        {
-            office.Remove(this); // Сначала удалить из офиса. Оставшиеся начнут прощаться
-            foreach (var person in office)
-            {
-                Leave += (sender, args) => { person.SayBye(this); };
-            }
-            Console.WriteLine($"{Name} ушел с работы.");
-            Leave?.Invoke(this, new EventArgs());
-
-        }
-        public Person(string name, Office office)
-        {
-            Name = name;
-            this.office = office;
-        }
     }
     
 
@@ -90,16 +101,27 @@ namespace Task2
         delegate void Message(string name);
         static void Main(string[] args)
         {
-            Office office = new Office();
-            Person lena = new Person("Лена", office);
-            Person sasha = new Person("Саша", office);
-            Person vova = new Person("Вова", office);
-            lena.OnCome(DateTime.Now);
-            sasha.OnCome(DateTime.Now);
-            vova.OnCome(DateTime.Now);
-            lena.OnLeave();
-            sasha.OnLeave();
-            vova.OnLeave();
+            
+            Person lena = new Person { Name="Лена" };
+            Person sasha = new Person { Name = "Саша" };
+            Person sonya = new Person { Name = "Соня" };
+            
+            List<Person> list = new List<Person>();
+            
+            list.Add(lena);
+            list.Add(sasha);
+            list.Add(sonya);
+            Office office = new Office(list);
+            /*lena.onCome += lena.Greet;
+            sasha.onCome += sasha.Greet;
+            sonya.onCome += sonya.Greet;*/
+            lena.Come(DateTime.Now);
+            sasha.Come(DateTime.Now);
+            sonya.Come(DateTime.Now);
+            lena.Leave();
+            sasha.Leave();
+            sonya.Leave();
+            
             Console.ReadLine();
         }
         

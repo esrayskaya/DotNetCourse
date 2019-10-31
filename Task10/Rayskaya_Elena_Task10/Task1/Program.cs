@@ -37,6 +37,7 @@ namespace Task1
             {
                 for (int j = i + 1; j < words.Length; j++)
                 {
+                    func1?.Invoke(words[i], words[j]);
                     int number = func1(words[i], words[j]);
                     if (number == 1)
                     {
@@ -48,10 +49,10 @@ namespace Task1
                 }
             }
             List<int> counter = new List<int>();
-            int count = 1;
             List<string> list = new List<string>(); 
             for(int i=0; i < words.Length-1; i++)
             {
+                func1?.Invoke(words[i], words[i + 1]);
                 if(func1(words[i], words[i + 1]) == 2)
                 {
                     //count++;
@@ -64,11 +65,6 @@ namespace Task1
                         index += element;
                     }
                 }
-                /*else if(func1(words[i], words[i + 1]) == 3)
-                {
-                    counter.Add(count);
-                    count = 1;
-                }*/
             }
             /*int index = 0;
             foreach (int element in counter)
