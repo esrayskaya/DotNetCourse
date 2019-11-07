@@ -77,11 +77,11 @@ namespace Task2
         }
         public void CopyOfChangeInHelpDirectory(/*string oldName*/)
         {
-            string ToDir= @"C:\Users\Lena\temp"+  DateTime.Now.ToString("dd.MM.yyyy hh-mm-ss");
-            Directory.CreateDirectory(ToDir);
+            string toDir= @"C:\Users\Lena\temp"+  DateTime.Now.ToString("dd.MM.yyyy hh-mm-ss");
+            Directory.CreateDirectory(toDir);
             foreach (string s1 in Directory.GetFiles(dirInfo.FullName))
             {
-                string s2 = ToDir + "\\" + Path.GetFileName(s1);
+                string s2 = toDir + "\\" + Path.GetFileName(s1);
                 File.Copy(s1, s2);
             }
             Console.WriteLine("Файлы скопированы");
@@ -89,13 +89,19 @@ namespace Task2
     }
     public class Rollback
     {
-        private readonly string PathToCatalog;//путь к отслеживаемой директории
+        //private readonly string PathToCatalog;//путь к отслеживаемой директории
         private DirectoryInfo dirInfo;
-        public Rollback(DateTime dt)
+        public Rollback(string dt)
         {
-            string date = dt.ToShortDateString();
+            //string date = dt.ToShortDateString();
             string pathToCatalog = @"C:\Users\Lena";
             dirInfo = new DirectoryInfo(pathToCatalog);
+            string[] nameOfElements = Directory.GetDirectories(pathToCatalog, "temp" + dt + "*", SearchOption.TopDirectoryOnly);
+            
+            foreach(string element in nameOfElements)
+            {
+                Console.WriteLine(element);
+            }
             //string fileName = "temp" + dt + "[0-9][0-9].[0-9][0-9].[0-9][0-9]";
             //if(Regex.IsMatch())
             //string[] findFiles = System.IO.Directory.GetDirectories(pathToCatalog, "temp07.11.2019 08-16-48", System.IO.SearchOption.AllDirectories);
@@ -126,8 +132,8 @@ namespace Task2
             if (x == 50)
             {
                 Console.WriteLine(" - Режим отката изменений.");
-                Console.WriteLine("Введите дату отката: ");
-                DateTime dt = DateTime.Parse(Console.ReadLine());
+                Console.WriteLine("Введите дату и время отката: ");
+                string dt = Console.ReadLine();
                 Rollback rollback = new Rollback(dt);
             }
             Console.ReadLine();
