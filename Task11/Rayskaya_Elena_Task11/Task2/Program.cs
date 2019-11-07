@@ -56,6 +56,10 @@ namespace Task2
             }
             return !employee1.Equals(employee2);
         }
+        public override int GetHashCode()
+        {
+            return this.WorkExperience.GetHashCode()^(this.WorkExperience.GetHashCode()+1);
+        }
         public override string ToString()
         {
             return $"Фамилия: {Surname}\nИмя: {Name}\nСтаж работы: {WorkExperience}\nДолжность: {Position}";
@@ -71,7 +75,11 @@ namespace Task2
             List<Employee> list = new List<Employee>();
             list.Add(employee1);
             list.Add(employee2);
-
+            Console.WriteLine($"Сотрудники:\n{employee1.ToString()}\n\n{employee2.ToString()}\n\n{employee3.ToString()}\n");
+            Console.WriteLine($"HasnCode 1 сотрудника: {employee1.GetHashCode()}");
+            Console.WriteLine($"Проверка на равенсто 1 и 2 сотрудников: {employee1.Equals(employee2)}");
+            Console.WriteLine($"Проверка на равенсто 1 и 3 сотрудников: {employee1.Equals(employee3)}");
+            Console.ReadLine();
         }
     }
 }

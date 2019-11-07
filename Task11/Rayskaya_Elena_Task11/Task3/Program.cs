@@ -82,7 +82,7 @@ namespace Task3
 
         /*public override int GetHashCode()
         {
-            return x ^ y; 
+            return x + y; 
         }*/
         public override int GetHashCode()
         {
